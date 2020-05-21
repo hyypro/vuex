@@ -60,10 +60,12 @@ export default {
   },
 
   methods: {
+
     openDialog () {
        this.id = ''
        this.dialogVisible = true
     },
+    
     handleOK (value) {
       if (value.id) {
         this.$store.dispatch('FETACH_TABLE_EDIT', value)
