@@ -1,32 +1,27 @@
 <template>
    <div>
      <el-dialog
-      :title="id ? '修改' : '添加'"
-      :visible="dialogVisible"
-      width="60%"
-      :before-close="handleClose"
-      :close-on-click-modal="false"
-      >
+        :title="id ? '修改' : '添加'"
+        :visible="dialogVisible"
+        width="60%"
+        :before-close="handleClose"
+        :close-on-click-modal="false"
+     >
       <span>
-        <el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
+     
+        <el-form :model="form" ref="numberValidateForm" label-width="100px" >
+           
             <el-form-item
               label="名字"
-              prop="age"
-              :rules="[
-                { required: true, message: '姓名不能为空'},
-              ]"
+              prop="name"
             >
-              <el-input type="age" v-model.number="numberValidateForm.age" autocomplete="off"></el-input>
+              <el-input type="text" v-model="form.name" ></el-input>
             </el-form-item>
             <el-form-item
               label="年龄"
-              prop="age"
-              :rules="[
-                { required: true, message: '年龄不能为空'},
-                { type: 'number', message: '年龄必须为数字值'}
-              ]"
+              prop="msg"
             >
-              <el-input type="age" v-model.number="numberValidateForm.age" autocomplete="off"></el-input>
+              <el-input type="text" v-model="form.msg" ></el-input>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="handleOK('numberValidateForm')">提交</el-button>
@@ -35,27 +30,40 @@
         </el-form>
       </span>
     </el-dialog>
+   
    </div>
 </template>
 
 <script>
-  
+  import { mapState } from 'vuex'
   export default {
     props:['dialogVisible', 'id'],
-data() {
+
+    data() {
       return {
-        numberValidateForm: {
-          age: ''
+        form: {
+          id: '',
+          name: '',
+          msg: '',
         }
       };
     },
+
+    updated () {
+      this.form = this.editData
+    },
+
+    computed: {
+      ...mapState(['editData'])
+    },
+
     methods: {
       handleOK(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.$emit('handleOK')
+            this.$emit('handleOK', this.form)
+            this.form = ''
           } else {
-           // console.log('error submit!!');
             return false;
           }
         })

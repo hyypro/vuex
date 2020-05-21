@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <el-button type="primary" @click="dialogVisible = true">添加</el-button>
+    <el-button type="primary" @click="openDialog">添加</el-button>
     <ModelForm 
      :id="id"
      :dialogVisible="dialogVisible"
@@ -13,18 +13,29 @@
       <el-table-column
         prop="id"
         label="编码"
-        width="500">
+        width="300">
       </el-table-column>
       <el-table-column
         prop="name"
         label="姓名"
-        width="500">
+        width="300">
       </el-table-column>
       <el-table-column
-        prop="age"
+        prop="msg"
         label="年龄"
-        width="500">
+        width="300">
       </el-table-column>
+      <el-table-column label="操作">
+      <template slot-scope="scope">
+        <el-button
+          size="mini"
+          @click="handleEdit(scope.row)">编辑</el-button>
+        <el-button
+          size="mini"
+          type="danger"
+          @click="handleDelete(scope.row)">删除</el-button>
+      </template>
+    </el-table-column>
     </el-table>
   </div>
 </template>
@@ -49,12 +60,35 @@ export default {
   },
 
   methods: {
-    handleOK () {
+    openDialog () {
+       this.id = ''
+       this.dialogVisible = true
+    },
+    handleOK (value) {
+      if (value.id) {
+        this.$store.dispatch('FETACH_TABLE_EDIT', value)
+      } else {
+        console.log(value)
+        this.$store.dispatch('FETACH_TABLE_ADD', value)
+      }
+      this.id = ''
       this.dialogVisible = false
+      this.$store.dispatch('FETACH_EDIT_DATA', {}) 
     },
 
     handleClose () {
       this.dialogVisible = false
+      this.$store.dispatch('FETACH_EDIT_DATA', {}) 
+    },
+
+    handleDelete (row) {
+      this.$store.dispatch('FETACH_TABLE_DELETE', row.id)
+    },
+
+    handleEdit (row) {
+     this.id = row.id
+     this.dialogVisible = true
+     this.$store.dispatch('FETACH_EDIT_DATA', row)
     }
   },
 
