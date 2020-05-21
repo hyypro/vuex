@@ -2,10 +2,10 @@
   <div class="home">
     <el-button type="primary" @click="openDialog">添加</el-button>
     <ModelForm 
-     :id="id"
-     :dialogVisible="dialogVisible"
-     @handleOK="handleOK"
-     @handleClose="handleClose"
+      :id="id"
+      :dialogVisible="dialogVisible"
+      @handleOK="handleOK"
+      @handleClose="handleClose"
     />
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="id" label="编码" />
