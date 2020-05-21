@@ -34,8 +34,8 @@
           size="mini"
           type="danger"
           @click="handleDelete(scope.row)">删除</el-button>
-      </template>
-    </el-table-column>
+       </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
