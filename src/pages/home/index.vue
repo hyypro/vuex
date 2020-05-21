@@ -7,33 +7,14 @@
      @handleOK="handleOK"
      @handleClose="handleClose"
     />
-    <el-table
-      :data="tableData"
-      style="width: 100%">
-      <el-table-column
-        prop="id"
-        label="编码"
-        width="300">
-      </el-table-column>
-      <el-table-column
-        prop="name"
-        label="姓名"
-        width="300">
-      </el-table-column>
-      <el-table-column
-        prop="msg"
-        label="年龄"
-        width="300">
-      </el-table-column>
+    <el-table :data="tableData" style="width: 100%">
+      <el-table-column prop="id" label="编码" />
+      <el-table-column prop="name" label="姓名" />
+      <el-table-column prop="msg" label="年龄" />
       <el-table-column label="操作">
       <template slot-scope="scope">
-        <el-button
-          size="mini"
-          @click="handleEdit(scope.row)">编辑</el-button>
-        <el-button
-          size="mini"
-          type="danger"
-          @click="handleDelete(scope.row)">删除</el-button>
+        <el-button  @click="handleEdit(scope.row)">编辑</el-button>
+        <el-button  type="danger" @click="handleDelete(scope.row)">删除</el-button>
        </template>
       </el-table-column>
     </el-table>
@@ -60,7 +41,7 @@ export default {
   },
 
   methods: {
-
+    
     openDialog () {
        this.id = ''
        this.dialogVisible = true
@@ -75,12 +56,12 @@ export default {
       }
       this.id = ''
       this.dialogVisible = false
-      this.$store.dispatch('FETACH_EDIT_DATA', {}) 
+      this.$store.dispatch('FETACH_EDIT_DATA', []) 
     },
 
     handleClose () {
       this.dialogVisible = false
-      this.$store.dispatch('FETACH_EDIT_DATA', {}) 
+      this.$store.dispatch('FETACH_EDIT_DATA', []) 
     },
 
     handleDelete (row) {
