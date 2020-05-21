@@ -10,17 +10,10 @@
       <span>
      
         <el-form :model="form" ref="numberValidateForm" label-width="100px" >
-           
-            <el-form-item
-              label="名字"
-              prop="name"
-            >
+            <el-form-item label="名字" prop="name" >
               <el-input type="text" v-model="form.name" ></el-input>
             </el-form-item>
-            <el-form-item
-              label="年龄"
-              prop="msg"
-            >
+            <el-form-item label="年龄" prop="msg" >
               <el-input type="text" v-model="form.msg" ></el-input>
             </el-form-item>
             <el-form-item>
@@ -42,7 +35,6 @@
     data() {
       return {
         form: {
-          id: '',
           name: '',
           msg: '',
         }
